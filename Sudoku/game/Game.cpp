@@ -31,7 +31,7 @@ void Game::Run()
             }
         }
 
-        m_Window.clear(sf::Color(42, 42, 42, 1)); // dark grey
+        m_Window.clear();
 
         // Draw calls
         m_Window.draw(m_Background);
@@ -43,18 +43,8 @@ void Game::Run()
 
 void Game::SetBackground(const std::string& path)
 {
-    sf::Texture texture;
-    if (texture.loadFromFile(path))
-    {
-        texture.loadFromFile(path);
-        m_Background = sf::Sprite(texture);
-        m_Background.setColor(sf::Color(170, 170, 170));
-    }
-    else
-    {
-        // Default gray color
-        m_Background.setColor(sf::Color(170, 170, 170));
-    }
+    m_BackGroundTexture.loadFromFile(path);
+    m_Background = sf::Sprite(m_BackGroundTexture);
 }
 
 bool Game::IsValidBoard()

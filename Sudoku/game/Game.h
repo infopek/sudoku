@@ -18,6 +18,7 @@ private:
 	bool IsValidBoard();
 private:
 	sf::RenderWindow m_Window;
+	sf::Texture m_BackGroundTexture;
 	sf::Sprite m_Background;
 
 	unsigned int m_Fps;
