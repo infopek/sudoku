@@ -12,12 +12,12 @@ public:
 	~Board();
 
 	void Draw(sf::RenderWindow& window);
-	void SetCell(int row, int col, int newVal);
+	void SetCell(int row, int col, sf::Text&& text);
 
 private:
 	struct Cell
 	{
-		int val;
+		sf::Text num;
 		bool selected;
 
 		int row;
@@ -26,22 +26,25 @@ private:
 		sf::RectangleShape shape;
 
 		Cell() {}
-		Cell(int val, bool selected, int row, int col, const sf::Vector2f& cellSize)
-			: val(val), selected(selected), row(row), col(col)
+		Cell(sf::Text&& text, bool selected, int row, int col, const sf::Vector2f& cellSize)
+			: num(std::move(text)), selected(selected), row(row), col(col)
 		{
 			shape = sf::RectangleShape(cellSize);
-			shape.setOrigin(cellSize / 2.0f);
-			shape.setPosition(sf::Vector2f(cellSize.x * (row + m_Padding), cellSize.y * (col + m_Padding)));
-			shape.setFillColor(sf::Color(240, 240, 240));
+			shape.setOrigin(0.5f * cellSize);
+			shape.setPosition(sf::Vector2f(cellSize.x * row, cellSize.y * col));
 
+			shape.setFillColor(sf::Color(240, 240, 240));
 			shape.setOutlineThickness(1.0f);
 			shape.setOutlineColor(sf::Color(192, 192, 192));
+
+			num.setOrigin(0.5f * num.getLocalBounds().width, 0.5f * num.getLocalBounds().height);
+			num.setPosition(shape.getPosition().x - 0.05f * cellSize.x, shape.getPosition().y - 0.17f * cellSize.y);
+
+			num.setFillColor(sf::Color(42, 42, 42));
 		}
 	};
 
 private:
-	static constexpr float m_Padding = 1.0f;	// times cellsize
-
 	int m_Size;
 	Cell** m_Grid;
 
