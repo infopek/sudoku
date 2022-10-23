@@ -167,15 +167,17 @@ void DrawNumpad(sf::RenderWindow& window, const sf::Font& font)
 	npFrame.setFillColor(sf::Color::Transparent);
 
 	// Draw cells
-	for (int i = 1; i <= M; i++)
+	for (int i = 0; i < M; i++)
 	{
-		for (int j = 1; j <= M; j++)
+		for (int j = 0; j < M; j++)
 		{
-			sf::RectangleShape cell(sf::Vector2f(NP_CELLSIZE - padding, NP_CELLSIZE - padding));
-			cell.setOrigin(0.5f * cell.getSize());
-			cell.setPosition(sf::Vector2f((N * CELLSIZE) + NP_CELLSIZE * i, NP_CELLSIZE * j + halfFrameSize.y - HALF_CELLSIZE));
+			window.draw(numpad[i][j].shape);
+			window.draw(numpad[i][j].text);
+		}
+	}
 
-			cell.setFillColor(sf::Color(255, 229, 204));
+	window.draw(npFrame);
+}
 
 // Select current cell, its row, col, box and all the numbers that are equal to its content on the board
 void SelectCells(Cell* cell)
