@@ -36,12 +36,8 @@ constexpr unsigned int FONTSIZE = 36;
 
 // Numpad
 constexpr int M = 3;
-int numpad[M][M] =
+Cell numpad[M][M];
 Cell* npSelected = nullptr;
-	{ 1, 2, 3 },
-	{ 4, 5, 6 },
-	{ 7, 8, 9 }
-};
 
 sf::RectangleShape npFrame;
 constexpr float NP_CELLSIZE = 110.0f;
@@ -73,6 +69,32 @@ void FillBoardRandom(const sf::Font& font)
 			num.setFillColor(sf::Color(42, 42, 42));
 
 			board[i - 1][j - 1] = Cell(square, num, i - 1, j - 1);
+		}
+	}
+}
+void FillNumpad(const sf::Font& font)
+{
+	int curr = 1;
+	for (int i = 1; i <= M; i++)
+	{
+		for (int j = 1; j <= M; j++)
+		{
+			sf::RectangleShape square(sf::Vector2f(NP_CELLSIZE - PADDING, NP_CELLSIZE - PADDING));
+			square.setOrigin(0.5f * square.getSize());
+			square.setPosition(sf::Vector2f((N * CELLSIZE) + NP_CELLSIZE * i, NP_CELLSIZE * j + 0.5f * M * NP_CELLSIZE - HALF_CELLSIZE));
+
+			square.setFillColor(sf::Color(255, 229, 204));
+
+			// Sample box so that every number is in the same position relative to cell
+			sf::FloatRect numBounds = sf::Text("0", font, NP_FONTSIZE).getLocalBounds();
+
+			sf::Text num(std::to_string(curr++), font, NP_FONTSIZE);
+			num.setOrigin(0.5f * numBounds.width, 0.5f * numBounds.height);
+			num.setPosition(square.getPosition().x - 0.07f * NP_HALF_CELLSIZE, square.getPosition().y - 0.17f * NP_HALF_CELLSIZE);
+
+			num.setFillColor(sf::Color(255, 128, 0));
+
+			numpad[j - 1][i - 1] = Cell(square, num, j - 1, i - 1);
 		}
 	}
 }
@@ -212,6 +234,7 @@ int main()
 	boldFont.loadFromFile("res/fonts/nanumgothic_bold.ttf");
 
 	FillBoardRandom(regFont);
+	FillNumpad(boldFont);
 
 	while (window.isOpen())
 	{
