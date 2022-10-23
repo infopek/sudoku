@@ -27,6 +27,7 @@ constexpr int FPS = 60;
 constexpr int N = 9;
 Cell board[N][N];
 
+sf::RectangleShape boardFrame;
 constexpr float CELLSIZE = 55.0f;
 constexpr float HALF_CELLSIZE = 0.5f * CELLSIZE;
 
@@ -41,7 +42,8 @@ int numpad[M][M] =
 	{ 7, 8, 9 }
 };
 
-constexpr float NP_CELLSIZE = CELLSIZE * 2.0f;
+sf::RectangleShape npFrame;
+constexpr float NP_CELLSIZE = 110.0f;
 constexpr float NP_HALF_CELLSIZE = 0.5f * NP_CELLSIZE;
 
 constexpr unsigned int NP_FONTSIZE = 42;
@@ -87,28 +89,28 @@ void DrawBoard(sf::RenderWindow& window, const sf::Font& font)
 	sf::Vector2f halfVertSize(0.5f * vertSize);
 
 	// Rectangles
-	sf::RectangleShape frame(frameSize);
+	boardFrame = sf::RectangleShape(frameSize);
 	sf::RectangleShape horiRect(horiSize);
 	sf::RectangleShape vertRect(vertSize);
 
 	// Set origin, position, outline of rectangles
-	frame.setOrigin(halfFrameSize);
+	boardFrame.setOrigin(halfFrameSize);
 	horiRect.setOrigin(halfHoriSize);
 	vertRect.setOrigin(halfVertSize);
 
-	frame.setPosition(halfFrameSize.x + HALF_CELLSIZE, halfFrameSize.y + HALF_CELLSIZE);
+	boardFrame.setPosition(halfFrameSize.x + HALF_CELLSIZE, halfFrameSize.y + HALF_CELLSIZE);
 	horiRect.setPosition(halfHoriSize.x + 3.5f * CELLSIZE, halfHoriSize.y + HALF_CELLSIZE);
 	vertRect.setPosition(halfVertSize.x + HALF_CELLSIZE, halfVertSize.y + 3.5f * CELLSIZE);
 
-	frame.setOutlineColor(sf::Color(30, 30, 30));
+	boardFrame.setOutlineColor(sf::Color(30, 30, 30));
 	horiRect.setOutlineColor(sf::Color(50, 50, 50));
 	vertRect.setOutlineColor(sf::Color(50, 50, 50));
 
-	frame.setOutlineThickness(3.0f);
+	boardFrame.setOutlineThickness(3.0f);
 	horiRect.setOutlineThickness(2.0f);
 	vertRect.setOutlineThickness(2.0f);
 
-	frame.setFillColor(sf::Color::Transparent);
+	boardFrame.setFillColor(sf::Color::Transparent);
 	horiRect.setFillColor(sf::Color::Transparent);
 	vertRect.setFillColor(sf::Color::Transparent);
 
@@ -124,7 +126,7 @@ void DrawBoard(sf::RenderWindow& window, const sf::Font& font)
 
 	window.draw(vertRect);
 	window.draw(horiRect);
-	window.draw(frame);
+	window.draw(boardFrame);
 }
 void DrawNumpad(sf::RenderWindow& window, const sf::Font& font)
 {
@@ -132,12 +134,12 @@ void DrawNumpad(sf::RenderWindow& window, const sf::Font& font)
 	sf::Vector2f frameSize(M * NP_CELLSIZE, M * NP_CELLSIZE);
 	sf::Vector2f halfFrameSize(0.5f * frameSize);
 
-	sf::RectangleShape frame(frameSize);
+	npFrame = sf::RectangleShape(frameSize);
 
-	frame.setOrigin(halfFrameSize);
-	frame.setPosition((N * CELLSIZE) + halfFrameSize.x + NP_HALF_CELLSIZE, 3.5f * CELLSIZE + halfFrameSize.y);
+	npFrame.setOrigin(halfFrameSize);
+	npFrame.setPosition((N * CELLSIZE) + halfFrameSize.x + NP_HALF_CELLSIZE, 3.5f * CELLSIZE + halfFrameSize.y);
 
-	frame.setFillColor(sf::Color::Transparent);
+	npFrame.setFillColor(sf::Color::Transparent);
 
 	// Draw cells
 	for (int i = 1; i <= M; i++)
