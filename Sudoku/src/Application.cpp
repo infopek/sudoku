@@ -59,7 +59,7 @@ void FillBoardRandom(const sf::Font& font)
 		{
 			sf::RectangleShape square(sf::Vector2f(CELLSIZE, CELLSIZE));
 			square.setOrigin(0.5f * square.getSize());
-			square.setPosition(sf::Vector2f(CELLSIZE * i, CELLSIZE * j));
+			square.setPosition(sf::Vector2f(CELLSIZE * j, CELLSIZE * i));
 
 			square.setFillColor(sf::Color(240, 240, 240));
 			square.setOutlineThickness(1.0f);
@@ -88,7 +88,7 @@ void FillNumpad(const sf::Font& font)
 		{
 			sf::RectangleShape square(sf::Vector2f(NP_CELLSIZE - PADDING, NP_CELLSIZE - PADDING));
 			square.setOrigin(0.5f * square.getSize());
-			square.setPosition(sf::Vector2f((N * CELLSIZE) + NP_CELLSIZE * i, NP_CELLSIZE * j + 0.5f * M * NP_CELLSIZE - HALF_CELLSIZE));
+			square.setPosition(sf::Vector2f((N * CELLSIZE) + NP_CELLSIZE * j, NP_CELLSIZE * i + 0.5f * M * NP_CELLSIZE - HALF_CELLSIZE));
 
 			square.setFillColor(sf::Color(255, 229, 204));
 
@@ -101,7 +101,7 @@ void FillNumpad(const sf::Font& font)
 
 			num.setFillColor(sf::Color(255, 128, 0));
 
-			numpad[j - 1][i - 1] = Cell(square, num, j - 1, i - 1);
+			numpad[i - 1][j - 1] = Cell(square, num, i - 1, j - 1);
 		}
 	}
 }
