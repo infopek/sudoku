@@ -50,6 +50,7 @@ constexpr float PADDING = 10.0f;
 
 constexpr unsigned int NP_FONTSIZE = 42;
 
+// Initialize board and numpad
 void FillBoardRandom(const sf::Font& font)
 {
 	for (int i = 1; i <= N; i++)
