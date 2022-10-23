@@ -6,12 +6,16 @@
 
 struct Cell
 {
+	int row;
+	int col;
+
 	sf::RectangleShape shape;
 	sf::Text text;
 
-	Cell() {}
-	Cell(const sf::RectangleShape& shape, const sf::Text& text)
-		: shape(shape), text(text) {}
+	Cell()
+		: row(-1), col(-1) {}
+	Cell(const sf::RectangleShape& shape, const sf::Text& text, int row, int col)
+		: shape(shape), text(text), row(row), col(col) {}
 };
 
 // Window
@@ -65,8 +69,7 @@ void FillBoardRandom(const sf::Font& font)
 
 			num.setFillColor(sf::Color(42, 42, 42));
 
-			board[i - 1][j - 1].shape = square;
-			board[i - 1][j - 1].text = num;
+			board[i - 1][j - 1] = Cell(square, num, i - 1, j - 1);
 		}
 	}
 }
