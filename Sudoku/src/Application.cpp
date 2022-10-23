@@ -251,6 +251,12 @@ void DeselectCells(Cell* cell)
 		for (int j = boxCol; j < boxCol + N / 3; j++)
 			if (!(i == row && j == col))
 				board[i][j].shape.setFillColor(sf::Color(240, 240, 240));
+
+	// Deselect numbers that are equal to clicked cell
+	if (cell->text.getString()[0] > '0')
+		for (Cell* c : sameNumbers[cell->text.getString()[0] - '0'])
+			if (c && !(c->row == row && c->col == col))
+				c->shape.setFillColor(sf::Color(240, 240, 240));
 }
 
 int main()
