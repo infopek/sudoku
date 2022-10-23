@@ -68,7 +68,13 @@ void FillBoardRandom(const sf::Font& font)
 			// Sample box so that every number is in the same position relative to cell
 			sf::FloatRect numBounds = sf::Text("0", font, FONTSIZE).getLocalBounds();
 
-			sf::Text num((char)(rand() % N + '0'), font, FONTSIZE);
+			int randomNum;
+			if (rand() % 4 == 0)
+				randomNum = rand() % N;
+			else
+				randomNum = 0;
+
+			sf::Text num((char)(randomNum + '0'), font, FONTSIZE);
 			num.setOrigin(0.5f * numBounds.width, 0.5f * numBounds.height);
 			num.setPosition(square.getPosition().x - 0.05f * CELLSIZE, square.getPosition().y - 0.17f * CELLSIZE);
 
