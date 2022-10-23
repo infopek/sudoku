@@ -241,17 +241,40 @@ int main()
 
 	while (window.isOpen())
 	{
-		// Event handling
 		sf::Vector2f mousePos(sf::Mouse::getPosition(window));
 		sf::Event event;
 
+		// Event handling
 		while (window.pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed)
+			{
 				window.close();
+			}
 
-			if (event.type == sf::Event::MouseButtonReleased && event.key.code == sf::Mouse::Left)
-				;
+			if (event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
+			{
+				// Clicked inside the board
+				if (boardFrame.getGlobalBounds().contains(mousePos))
+				{
+					if (brdSelected)
+						DeselectCells(brdSelected);
+
+					bool found = false;
+					for (int i = 0; i < N; i++)
+					{
+						for (int j = 0; j < N; j++)
+						{
+							if (board[i][j].shape.getGlobalBounds().contains(mousePos) && !found)
+							{
+								brdSelected = &board[i][j];
+								SelectCells(brdSelected);
+								found = true;
+							}
+						}
+					}
+				}
+			}
 		}
 
 		window.clear();
