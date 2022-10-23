@@ -106,6 +106,7 @@ void FillNumpad(const sf::Font& font)
 	}
 }
 
+// Draw routines
 void DrawBoard(sf::RenderWindow& window, const sf::Font& font)
 {
 	// Set size of 3 rectangles defining the grid (-1.0f so that right and bottom edge overlap with cell border)
