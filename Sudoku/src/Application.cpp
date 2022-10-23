@@ -143,6 +143,7 @@ void DrawBoard(sf::RenderWindow& window, const sf::Font& font)
 		for (int j = 1; j <= N; j++)
 		{
 			window.draw(board[i - 1][j - 1].shape);
+			if (board[i - 1][j - 1].text.getString()[0] > '0')
 			window.draw(board[i - 1][j - 1].text);
 		}
 	}
