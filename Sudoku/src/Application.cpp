@@ -304,6 +304,7 @@ int main()
 						DeselectCells(brdSelected);
 
 					bool found = false;
+					// Improve: speed (currently O(n^2))
 					for (int i = 0; i < N; i++)
 					{
 						for (int j = 0; j < N; j++)
