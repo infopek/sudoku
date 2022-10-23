@@ -61,10 +61,10 @@ void FillBoardRandom(const sf::Font& font)
 			square.setOutlineColor(sf::Color(192, 192, 192));
 
 			// Sample box so that every number is in the same position relative to cell
-			sf::FloatRect box = sf::Text("0", font, FONTSIZE).getLocalBounds();
+			sf::FloatRect numBounds = sf::Text("0", font, FONTSIZE).getLocalBounds();
 
-			sf::Text num((char)(rand() % N + 1 + '0'), font, FONTSIZE);
-			num.setOrigin(0.5f * box.width, 0.5f * box.height);
+			sf::Text num((char)(rand() % N + '0'), font, FONTSIZE);
+			num.setOrigin(0.5f * numBounds.width, 0.5f * numBounds.height);
 			num.setPosition(square.getPosition().x - 0.05f * CELLSIZE, square.getPosition().y - 0.17f * CELLSIZE);
 
 			num.setFillColor(sf::Color(42, 42, 42));
