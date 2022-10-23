@@ -26,6 +26,7 @@ constexpr int FPS = 60;
 // Board
 constexpr int N = 9;
 Cell board[N][N];
+Cell* brdSelected = nullptr;
 
 sf::RectangleShape boardFrame;
 constexpr float CELLSIZE = 55.0f;
@@ -36,7 +37,7 @@ constexpr unsigned int FONTSIZE = 36;
 // Numpad
 constexpr int M = 3;
 int numpad[M][M] =
-{
+Cell* npSelected = nullptr;
 	{ 1, 2, 3 },
 	{ 4, 5, 6 },
 	{ 7, 8, 9 }
@@ -152,21 +153,41 @@ void DrawNumpad(sf::RenderWindow& window, const sf::Font& font)
 
 			cell.setFillColor(sf::Color(255, 229, 204));
 
-			// Sample box so that every number is in the same position relative to cell
-			sf::FloatRect box = sf::Text("0", font, NP_FONTSIZE).getLocalBounds();
+// Select current cell, its row, col, box and all the numbers that are equal to its content on the board
+void SelectCells(Cell* cell)
+{
+	int row = cell->row;
+	int col = cell->col;
 
-			sf::Text num(std::to_string(numpad[j - 1][i - 1]), font, NP_FONTSIZE);
-			num.setOrigin(0.5f * box.width, 0.5f * box.height);
-			num.setPosition(cell.getPosition().x - 0.07f * NP_HALF_CELLSIZE, cell.getPosition().y - 0.17f * NP_HALF_CELLSIZE);
+	// Highlight clicked cell
+	cell->shape.setFillColor(sf::Color(240, 210, 100));
 
-			num.setFillColor(sf::Color(255, 128, 0));
-
-			window.draw(cell);
-			window.draw(num);
+	// Highlight row and col, slightly lighter color
+	for (int z = 0; z < N; z++)
+	{
+		if (z != col)
+			board[row][z].shape.setFillColor(sf::Color(250, 240, 190));
+		if (z != row)
+			board[z][col].shape.setFillColor(sf::Color(250, 240, 190));
 		}
 	}
+// Deselect current cell, its row, col, box and all the numbers that are equal to its content on the board
+void DeselectCells(Cell* cell)
+{
+	int row = cell->row;
+	int col = cell->col;
 
-	window.draw(frame);
+	// Deselect clicked cell
+	cell->shape.setFillColor(sf::Color(240, 240, 240));
+
+	// Deselect row, col
+	for (int z = 0; z < N; z++)
+	{
+		if (z != col)
+			board[row][z].shape.setFillColor(sf::Color(240, 240, 240));
+		if (z != row)
+			board[z][col].shape.setFillColor(sf::Color(240, 240, 240));
+	}
 }
 
 int main()
