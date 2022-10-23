@@ -202,12 +202,12 @@ void SelectCells(Cell* cell)
 	cell->shape.setFillColor(sf::Color(240, 200, 100));
 
 	// Highlight row and col, slightly lighter color
-	for (int z = 0; z < N; z++)
+	for (int n = 0; n < N; n++)
 	{
-		if (z != col)
-			board[row][z].shape.setFillColor(sf::Color(250, 240, 190));
-		if (z != row)
-			board[z][col].shape.setFillColor(sf::Color(250, 240, 190));
+		if (n != col)
+			board[row][n].shape.setFillColor(sf::Color(250, 240, 190));
+		if (n != row)
+			board[n][col].shape.setFillColor(sf::Color(250, 240, 190));
 		}
 	}
 // Deselect current cell, its row, col, box and all the numbers that are equal to its content on the board
