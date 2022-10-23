@@ -242,6 +242,15 @@ void DeselectCells(Cell* cell)
 		if (z != row)
 			board[z][col].shape.setFillColor(sf::Color(240, 240, 240));
 	}
+
+	int boxRow = row / (N / 3) * 3;
+	int boxCol = col / (N / 3) * 3;
+
+	// Deselect sub box
+	for (int i = boxRow; i < boxRow + N / 3; i++)
+		for (int j = boxCol; j < boxCol + N / 3; j++)
+			if (!(i == row && j == col))
+				board[i][j].shape.setFillColor(sf::Color(240, 240, 240));
 }
 
 int main()
