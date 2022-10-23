@@ -199,7 +199,7 @@ void SelectCells(Cell* cell)
 	int col = cell->col;
 
 	// Highlight clicked cell
-	cell->shape.setFillColor(sf::Color(240, 210, 100));
+	cell->shape.setFillColor(sf::Color(240, 200, 100));
 
 	// Highlight row and col, slightly lighter color
 	for (int z = 0; z < N; z++)
