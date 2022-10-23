@@ -209,6 +209,15 @@ void SelectCells(Cell* cell)
 		if (n != row)
 			board[n][col].shape.setFillColor(sf::Color(250, 240, 190));
 		}
+
+	int boxRow = row / (N / 3) * 3;
+	int boxCol = col / (N / 3) * 3;
+
+	// Highlight sub box
+	for (int i = boxRow; i < boxRow + N / 3; i++)
+		for (int j = boxCol; j < boxCol + N / 3; j++)
+			if (!(i == row && j == col))
+				board[i][j].shape.setFillColor(sf::Color(250, 240, 190));
 	}
 // Deselect current cell, its row, col, box and all the numbers that are equal to its content on the board
 void DeselectCells(Cell* cell)
