@@ -2,6 +2,9 @@
 #include <cstring>
 #include <numeric>
 
+#include <vector>
+#include <unordered_map>
+
 #include <SFML/Graphics.hpp>
 
 struct Cell
@@ -27,6 +30,7 @@ constexpr int FPS = 60;
 constexpr int N = 9;
 Cell board[N][N];
 Cell* brdSelected = nullptr;
+std::vector<std::vector<Cell*>> sameNumbers(N, std::vector<Cell*>(N));
 
 sf::RectangleShape boardFrame;
 constexpr float CELLSIZE = 55.0f;
@@ -70,6 +74,7 @@ void FillBoardRandom(const sf::Font& font)
 			num.setFillColor(sf::Color(42, 42, 42));
 
 			board[i - 1][j - 1] = Cell(square, num, i - 1, j - 1);
+			sameNumbers[randomNum].push_back(&board[i - 1][j - 1]);
 		}
 	}
 }
