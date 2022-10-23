@@ -42,6 +42,7 @@ Cell* npSelected = nullptr;
 sf::RectangleShape npFrame;
 constexpr float NP_CELLSIZE = 110.0f;
 constexpr float NP_HALF_CELLSIZE = 0.5f * NP_CELLSIZE;
+constexpr float PADDING = 10.0f;
 
 constexpr unsigned int NP_FONTSIZE = 42;
 
