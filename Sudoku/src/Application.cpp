@@ -232,9 +232,8 @@ int main()
 
 	// Font
 	sf::Font regFont;
-	regFont.loadFromFile("res/fonts/nanumgothic_regular.ttf");
-
 	sf::Font boldFont;
+	regFont.loadFromFile("res/fonts/nanumgothic_regular.ttf");
 	boldFont.loadFromFile("res/fonts/nanumgothic_bold.ttf");
 
 	FillBoardRandom(regFont);
