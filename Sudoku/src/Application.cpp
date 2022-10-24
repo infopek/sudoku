@@ -306,9 +306,11 @@ int main()
 	regFont.loadFromFile("res/fonts/nanumgothic_regular.ttf");
 	boldFont.loadFromFile("res/fonts/nanumgothic_bold.ttf");
 
+	// Initialization
 	FillBoardRandom(regFont);
 	FillNumpad(boldFont);
 
+	// Loop
 	while (window.isOpen())
 	{
 		sf::Vector2f mousePos(sf::Mouse::getPosition(window));
@@ -324,7 +326,7 @@ int main()
 
 			if (event.type == sf::Event::MouseButtonPressed && event.key.code == sf::Mouse::Left)
 			{
-				// Clicked inside the board
+				// Clicked inside board area
 				if (boardFrame.getGlobalBounds().contains(mousePos))
 				{
 					if (brdSelected)
@@ -345,6 +347,8 @@ int main()
 						}
 					}
 				}
+				
+				// Clicked inside numpad area
 			}
 		}
 
