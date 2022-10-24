@@ -349,6 +349,28 @@ int main()
 				}
 				
 				// Clicked inside numpad area
+				else if (npFrame.getGlobalBounds().contains(mousePos) && brdSelected)
+				{
+					// TODO: add check for cells which contain pre-generated values
+					for (int i = 0; i < M; i++)
+					{
+						for (int j = 0; j < M; j++)
+						{
+							if (numpad[i][j].shape.getGlobalBounds().contains(mousePos))
+							{
+								char newNum = numpad[i][j].text.getString()[0];
+								DeselectCells(brdSelected);
+
+								sf::Vector2f pos = brdSelected->shape.getPosition();
+								sameNumbers[brdSelected->text.getString()[0] - '0'][{ pos.x, pos.y }] = nullptr;
+								brdSelected->text.setString(newNum);
+								sameNumbers[newNum - '0'][{ pos.x, pos.y }] = brdSelected;
+
+								SelectCells(brdSelected);
+							}
+						}
+					}
+				}
 			}
 		}
 
