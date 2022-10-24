@@ -209,7 +209,7 @@ void DrawNumpad(sf::RenderWindow& window, const sf::Font& font)
 	window.draw(npFrame);
 }
 
-// Select current cell, its row, col, box and all the numbers that are equal to its content on the board
+// Select and deselect a cell, its row, col, box and all the numbers that are equal to its content on the board
 void SelectCells(Cell* cell)
 {
 	int row = cell->row;
