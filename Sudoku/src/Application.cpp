@@ -7,6 +7,19 @@
 
 #include <SFML/Graphics.hpp>
 
+namespace std 
+{
+	template<typename X, typename Y>
+	struct hash<std::pair<X, Y>>
+	{
+		std::size_t operator()(const std::pair<X, Y>& pair) const 
+		{
+			return std::hash<X>()(pair.first) ^ std::hash<Y>()(pair.second);
+		}
+	};
+}
+
+
 struct Cell
 {
 	int row;
@@ -30,7 +43,7 @@ constexpr int FPS = 60;
 constexpr int N = 9;
 Cell board[N][N];
 Cell* brdSelected = nullptr;
-std::vector<std::vector<Cell*>> sameNumbers(N, std::vector<Cell*>(N));
+std::vector<std::unordered_map<std::pair<float, float>, Cell*>> sameNumbers(N + 1);
 
 sf::RectangleShape boardFrame;
 constexpr float CELLSIZE = 55.0f;
