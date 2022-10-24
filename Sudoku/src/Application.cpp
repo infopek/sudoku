@@ -87,6 +87,7 @@ void FillBoardRandom(const sf::Font& font)
 			else
 				randomNum = 0;
 
+			// Number inside the cell
 			sf::Text num((char)(randomNum + '0'), font, FONTSIZE);
 			num.setOrigin(0.5f * numBounds.width, 0.5f * numBounds.height);
 			num.setPosition(square.getPosition().x - 0.05f * CELLSIZE, square.getPosition().y - 0.17f * CELLSIZE);
