@@ -274,11 +274,16 @@ void DeselectCells(Cell* cell)
 			if (!(i == row && j == col))
 				board[i][j].shape.setFillColor(sf::Color(240, 240, 240));
 
-	// Deselect numbers that are equal to clicked cell
+	std::unordered_map<std::pair<float, float>, Cell*>& cells = sameNumbers[cell->text.getString()[0] - '0'];
 	if (cell->text.getString()[0] > '0')
-		for (Cell* c : sameNumbers[cell->text.getString()[0] - '0'])
+	{
+		for (auto it = cells.begin(); it != cells.end(); it++)
+		{
+			Cell* c = it->second;
 			if (c && !(c->row == row && c->col == col))
 				c->shape.setFillColor(sf::Color(240, 240, 240));
+}
+	}
 }
 
 int main()
