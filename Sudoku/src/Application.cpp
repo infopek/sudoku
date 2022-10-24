@@ -246,7 +246,8 @@ void SelectCells(Cell* cell)
 			if (c && !(c->row == row && c->col == col))
 				c->shape.setFillColor(sf::Color(240, 180, 30));
 	}
-// Deselect current cell, its row, col, box and all the numbers that are equal to its content on the board
+	}
+}
 void DeselectCells(Cell* cell)
 {
 	int row = cell->row;
