@@ -82,8 +82,8 @@ void FillBoardRandom(const sf::Font& font)
 			sf::FloatRect numBounds = sf::Text("0", font, FONTSIZE).getLocalBounds();
 
 			int randomNum;
-			if (rand() % 4 == 0)
-				randomNum = rand() % N;
+			if (rand() % 5 == 0)
+				randomNum = rand() % N + 1;
 			else
 				randomNum = 0;
 
