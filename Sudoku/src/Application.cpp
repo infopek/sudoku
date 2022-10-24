@@ -93,9 +93,12 @@ void FillBoardRandom(const sf::Font& font)
 			num.setPosition(square.getPosition().x - 0.05f * CELLSIZE, square.getPosition().y - 0.17f * CELLSIZE);
 
 			num.setFillColor(sf::Color(42, 42, 42));
-
 			board[i - 1][j - 1] = Cell(square, num, i - 1, j - 1);
-			sameNumbers[randomNum].push_back(&board[i - 1][j - 1]);
+
+			// Store position of cell
+			sf::Vector2f pos = board[i - 1][j - 1].shape.getPosition();
+			std::pair<float, float> coords = { pos.x, pos.y };
+			sameNumbers[randomNum][coords] = &board[i - 1][j - 1];
 		}
 	}
 }
@@ -234,8 +237,12 @@ void SelectCells(Cell* cell)
 				board[i][j].shape.setFillColor(sf::Color(250, 240, 190));
 
 	// Highlight numbers that are equal to clicked cell
+	std::unordered_map<std::pair<float, float>, Cell*>& cells = sameNumbers[cell->text.getString()[0] - '0'];
 	if (cell->text.getString()[0] > '0')
-		for (Cell* c : sameNumbers[cell->text.getString()[0] - '0'])
+	{
+		for (auto it = cells.begin(); it != cells.end(); it++)
+		{
+			Cell* c = it->second;
 			if (c && !(c->row == row && c->col == col))
 				c->shape.setFillColor(sf::Color(240, 180, 30));
 	}
